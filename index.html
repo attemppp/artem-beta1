@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Артем Коровин</title>
+    <!-- Подключаем файл стилей -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ====== НАВИГАЦИОННОЕ МЕНЮ (всегда сверху) ====== -->
+    <nav>
+        <!-- Кнопки-вкладки. data-page — это атрибут, чтобы JS понимал, какую "страницу" открыть -->
+        <button data-page="home" class="nav-btn active">Главная</button>
+        <button data-page="gallery" class="nav-btn">Фотоархив</button>
+        <button data-page="quiz" class="nav-btn">Викторина</button>
+        <button data-page="clicker" class="nav-btn">Кликер</button>
+    </nav>
+
+    <!-- ====== КОНТЕЙНЕР ДЛЯ ВСЕХ СТРАНИЦ ====== -->
+    <main id="app">
+
+        <!-- ====== СТРАНИЦА 1: ГЛАВНАЯ ====== -->
+        <section id="home" class="page active">
+            <!-- Заголовок первого уровня -->
+            <h1>Артем Коровин</h1>
+            <!-- Подзаголовок -->
+            <p class="subtitle">Фан-сайт Артема Коровина</p>
+
+            <!-- Блок с аватаркой и цитатой -->
+            <div class="hero-card">
+                <!-- img — вставка картинки. src — путь к файлу. alt — текст, если картинка не загрузится -->
+                <img src="https://i.ibb.co/0jqXqNc/placeholder.png" alt="Артем Коровин" class="hero-avatar">
+                <blockquote>
+                    дудя
+                </blockquote>
+            </div>
+
+            <!-- Блок с фактами -->
+            <div class="facts-grid">
+                <div class="fact-card">Любимый предмет: перемена</div>
+                <div class="fact-card">Рекорд: кончил за 0.5 секунд</div>
+                <div class="fact-card">Любимая игра: печенька</div>
+                <div class="fact-card">Статус: дудя</div>
+            </div>
+        </section>
+
+        <!-- ====== СТРАНИЦА 2: ФОТОАРХИВ ====== -->
+        <section id="gallery" class="page">
+            <h2>Фотоархив Коровина</h2>
+            <div class="gallery-grid" id="galleryContainer">
+                <!-- Карточки с фото добавятся через JavaScript -->
+            </div>
+        </section>
+
+        <!-- ====== СТРАНИЦА 3: ВИКТОРИНА ====== -->
+        <section id="quiz" class="page">
+            <h2>Викторина «Насколько ты знаешь Артема Коровина?»</h2>
+
+            <!-- Стартовый экран викторины -->
+            <div id="quizStart">
+                <input type="text" id="quizNickname" placeholder="Введи ник" maxlength="15">
+                <button id="quizStartBtn">Начать викторину</button>
+                <p id="quizError" class="error"></p>
+            </div>
+
+            <!-- Экран с вопросом (изначально скрыт) -->
+            <div id="quizGame" class="hidden">
+                <p class="counter">Вопрос <span id="qCurrent">1</span>/<span id="qTotal">5</span></p>
+                <p id="qText"></p>
+                <div id="qAnswers"></div>
+                <p>Очки: <span id="qScore">0</span></p>
+            </div>
+
+            <!-- Экран результата (скрыт) -->
+            <div id="quizEnd" class="hidden">
+                <h3>Твой результат: <span id="qFinalScore">0</span> очков</h3>
+                <button id="quizAgainBtn">Играть ещё</button>
+            </div>
+
+            <!-- Таблица лидеров -->
+            <div class="leaderboard">
+                <h3>Топ лучших любителей Коровина</h3>
+                <ol id="quizLeaderboard"><li>Загрузка...</li></ol>
+            </div>
+        </section>
+
+        <!-- ====== СТРАНИЦА 4: КЛИКЕР ====== -->
+        <section id="clicker" class="page">
+            <h2>Тапни Коровина</h2>
+            <p>Тапов тапнуто: <span id="pieCount">0</span></p>
+            <!-- Кнопка-кликер. onclick — вызов функции при клике -->
+            <button id="pieBtn" class="pie-button">тапнуть дудю</button>
+            <p id="pieMessage"></p>
+            <button id="pieSaveBtn" class="hidden">Сохранить рекорд</button>
+            <input type="text" id="pieNickname" class="hidden" placeholder="Твой ник" maxlength="15">
+
+            <!-- Таблица лидеров кликера -->
+            <div class="leaderboard">
+                <h3>Топ таптаперов</h3>
+                <ol id="clickerLeaderboard"><li>Загрузка...</li></ol>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Подключаем Firebase (база данных) -->
+   <script type="module">
+    // Правильный импорт для браузера (через CDN-ссылки)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    // Твой конфиг (ты его уже скопировал правильно)
+    const firebaseConfig = {
+        apiKey: "AIzaSyD51bg5LhmPVfS6yDneNyHx4mtN3CbUdKw",
+        authDomain: "korovin-fan-site.firebaseapp.com",
+        projectId: "korovin-fan-site",
+        storageBucket: "korovin-fan-site.firebasestorage.app",
+        messagingSenderId: "156636248340",
+        appId: "1:156636248340:web:010097bfd25d6757812a01",
+        measurementId: "G-RLGLFQTYY8"
+    };
+
+    // Инициализация
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Делаем доступным для script.js
+    window.db = db;
+    window.fb = { collection, addDoc, query, orderBy, limit, onSnapshot, serverTimestamp };
+    </script>
+    <!-- Подключаем нашу логику -->
+    <script src="script.js"></script>
+</body>
+</html>

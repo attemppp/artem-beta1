@@ -1,0 +1,250 @@
+/* ====== 1. СБРОС И БАЗОВЫЕ НАСТРОЙКИ ====== */
+/* * — это селектор "все элементы" */
+* {
+    margin: 0;  /* убираем все внешние отступы */
+    padding: 0; /* убираем все внутренние отступы */
+    box-sizing: border-box; /* чтобы padding не увеличивал размер элемента */
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif; /* шрифт */
+    background: #0d1117; /* очень тёмный фон (как в GitHub) */
+    color: #c9d1d9; /* светло-серый текст */
+    min-height: 100vh; /* минимум — весь экран */
+    line-height: 1.6; /* расстояние между строк */
+}
+
+/* ====== 2. НАВИГАЦИЯ ====== */
+nav {
+    display: flex; /* элементы в ряд */
+    justify-content: center; /* по центру */
+    gap: 5px; /* расстояние между кнопками */
+    padding: 15px;
+    background: #161b22; /* чуть светлее фона */
+    border-bottom: 2px solid #30363d; /* нижняя граница */
+    flex-wrap: wrap; /* перенос на новую строку, если не влезает */
+    position: sticky; /* прилипает к верху при прокрутке */
+    top: 0;
+    z-index: 100; /* чтобы было поверх всего */
+}
+
+.nav-btn {
+    background: #21262d;
+    color: #8b949e;
+    border: 1px solid #30363d;
+    padding: 10px 18px;
+    border-radius: 8px; /* скругление углов */
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s; /* плавная анимация всех изменений */
+}
+
+.nav-btn:hover {
+    background: #30363d; /* при наведении */
+    color: #f0f6fc;
+}
+
+.nav-btn.active {
+    background: #da3633; /* красный — активная кнопка */
+    color: white;
+    border-color: #da3633;
+}
+
+/* ====== 3. СТРАНИЦЫ ====== */
+.page {
+    display: none; /* все страницы скрыты по умолчанию */
+    padding: 30px;
+    max-width: 800px;
+    margin: 0 auto; /* центрирование */
+    animation: fadeIn 0.3s ease; /* анимация появления */
+}
+
+.page.active {
+    display: block; /* активная страница видна */
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== 4. ГЛАВНАЯ СТРАНИЦА ====== */
+h1 {
+    font-size: 2.5em;
+    text-align: center;
+    color: #f0f6fc;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #8b949e;
+    margin-bottom: 25px;
+}
+
+.hero-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #161b22;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #30363d;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.hero-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* круг */
+    border: 3px solid #da3633;
+    object-fit: cover; /* картинка заполняет круг, обрезаясь */
+}
+
+blockquote {
+    font-style: italic;
+    color: #da3633;
+    font-size: 1.2em;
+}
+
+.facts-grid {
+    display: grid;
+    /* grid-template-columns — колонки сетки.
+       repeat(auto-fit, minmax(200px, 1fr)) — автоматически подстраивается:
+       создаёт колонки минимум 200px, заполняя всё пространство */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.fact-card {
+    background: #161b22;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #da3633; /* красная полоса слева */
+    text-align: center;
+}
+
+/* ====== 5. ФОТОАРХИВ ====== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.gallery-card {
+    background: #161b22;
+    border-radius: 10px;
+    overflow: hidden; /* чтобы картинка не вылезала за скругление */
+    border: 1px solid #30363d;
+    transition: transform 0.2s;
+}
+
+.gallery-card:hover {
+    transform: scale(1.03); /* лёгкое увеличение при наведении */
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover; /* картинка заполняет блок, сохраняя пропорции */
+}
+
+.gallery-card p {
+    padding: 10px;
+    text-align: center;
+    font-size: 14px;
+}
+
+/* ====== 6. ВИКТОРИНА ====== */
+input[type="text"] {
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #30363d;
+    background: #0d1117;
+    color: #c9d1d9;
+    width: 100%;
+    max-width: 300px;
+    margin: 10px 0;
+}
+
+button {
+    background: #238636; /* зелёный */
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background 0.2s;
+}
+
+button:hover { background: #2ea043; }
+
+/* Кнопки ответов */
+.answer-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #21262d;
+    border: 1px solid #30363d;
+    margin: 5px 0;
+}
+
+.answer-btn:hover {
+    background: #30363d;
+}
+
+/* ====== 7. КЛИКЕР ====== */
+.pie-button {
+    font-size: 100px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s;
+    display: block;
+    margin: 20px auto;
+}
+
+.pie-button:active {
+    transform: scale(0.9); /* уменьшается при клике */
+}
+
+/* ====== 8. ТАБЛИЦЫ ЛИДЕРОВ ====== */
+.leaderboard {
+    background: #161b22;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 30px;
+    border: 1px solid #30363d;
+}
+
+.leaderboard h3 {
+    border-bottom: 1px solid #30363d;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    color: #f0f6fc;
+}
+
+.leaderboard ol {
+    padding-left: 25px;
+}
+
+.leaderboard li {
+    padding: 5px 0;
+    border-bottom: 1px dotted #21262d;
+}
+
+/* ====== 9. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ ====== */
+.hidden {
+    display: none !important; /* полностью скрывает элемент */
+}
+
+.error {
+    color: #da3633;
+    font-size: 14px;
+}
