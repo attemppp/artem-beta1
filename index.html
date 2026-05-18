@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Артем Коровин</title>
-    <!-- Подключаем файл стилей -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -68,7 +67,13 @@
         <section id="clicker" class="page">
             <h2>Тапни Коровина</h2>
             <p>Тапов тапнуто: <span id="pieCount">0</span></p>
-            <button id="pieBtn" class="pie-button">тапнуть дудю</button>
+          <div class="clicker-container">
+    <div class="artem-clicker" id="artemClicker">
+        <img src="ССЫЛКА_НА_ФОТО_АРТЕМА" alt="Артём" class="artem-face" id="artemFace">
+        <div class="click-zone" id="clickZone"></div>
+    </div>
+    <p class="click-hint">Жми на дудю!</p>
+</div>
             <p id="pieMessage"></p>
             <button id="pieSaveBtn" class="hidden">Сохранить рекорд тапов дуди</button>
             <input type="text" id="pieNickname" class="hidden" placeholder="Твой ник" maxlength="15">
