@@ -1,31 +1,30 @@
-/* ====== 1. СБРОС И БАЗОВЫЕ НАСТРОЙКИ ====== */
-/* * — это селектор "все элементы" */
+
 * {
-    margin: 0;  /* убираем все внешние отступы */
-    padding: 0; /* убираем все внутренние отступы */
-    box-sizing: border-box; /* чтобы padding не увеличивал размер элемента */
+    margin: 0;  
+    padding: 0; 
+    box-sizing: border-box; 
 }
 
 body {
-    font-family: 'Segoe UI', system-ui, sans-serif; /* шрифт */
-    background: #0d1117; /* очень тёмный фон (как в GitHub) */
-    color: #c9d1d9; /* светло-серый текст */
-    min-height: 100vh; /* минимум — весь экран */
-    line-height: 1.6; /* расстояние между строк */
+    font-family: 'Segoe UI', system-ui, sans-serif; 
+    background: #0d1117; 
+    color: #c9d1d9; 
+    min-height: 100vh; 
+    line-height: 1.6; 
 }
 
-/* ====== 2. НАВИГАЦИЯ ====== */
+
 nav {
-    display: flex; /* элементы в ряд */
-    justify-content: center; /* по центру */
-    gap: 5px; /* расстояние между кнопками */
+    display: flex; 
+    justify-content: center; 
+    gap: 5px; 
     padding: 15px;
-    background: #161b22; /* чуть светлее фона */
-    border-bottom: 2px solid #30363d; /* нижняя граница */
-    flex-wrap: wrap; /* перенос на новую строку, если не влезает */
-    position: sticky; /* прилипает к верху при прокрутке */
+    background: #161b22; 
+    border-bottom: 2px solid #30363d; 
+    flex-wrap: wrap; 
+    position: sticky; 
     top: 0;
-    z-index: 100; /* чтобы было поверх всего */
+    z-index: 100; 
 }
 
 .nav-btn {
@@ -33,43 +32,43 @@ nav {
     color: #8b949e;
     border: 1px solid #30363d;
     padding: 10px 18px;
-    border-radius: 8px; /* скругление углов */
+    border-radius: 8px; 
     cursor: pointer;
     font-size: 14px;
-    transition: all 0.2s; /* плавная анимация всех изменений */
+    transition: all 0.2s; 
 }
 
 .nav-btn:hover {
-    background: #30363d; /* при наведении */
+    background: #30363d; 
     color: #f0f6fc;
 }
 
 .nav-btn.active {
-    background: #da3633; /* красный — активная кнопка */
+    background: #da3633; 
     color: white;
     border-color: #da3633;
 }
 
-/* ====== 3. СТРАНИЦЫ ====== */
+
 .page {
-    display: none; /* все страницы скрыты по умолчанию */
+    display: none; 
     padding: 30px;
     max-width: 800px;
-    margin: 0 auto; /* центрирование */
-    animation: fadeIn 0.3s ease; /* анимация появления */
+    margin: 0 auto; 
+    animation: fadeIn 0.3s ease; 
 }
 
 .page.active {
-    display: block; /* активная страница видна */
+    display: block; 
 }
 
-/* Анимация появления */
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* ====== 4. ГЛАВНАЯ СТРАНИЦА ====== */
+
 h1 {
     font-size: 2.5em;
     text-align: center;
@@ -99,9 +98,9 @@ h1 {
 .hero-avatar {
     width: 120px;
     height: 120px;
-    border-radius: 50%; /* круг */
+    border-radius: 50%; 
     border: 3px solid #da3633;
-    object-fit: cover; /* картинка заполняет круг, обрезаясь */
+    object-fit: cover; 
 }
 
 blockquote {
@@ -112,9 +111,6 @@ blockquote {
 
 .facts-grid {
     display: grid;
-    /* grid-template-columns — колонки сетки.
-       repeat(auto-fit, minmax(200px, 1fr)) — автоматически подстраивается:
-       создаёт колонки минимум 200px, заполняя всё пространство */
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 15px;
 }
@@ -123,11 +119,10 @@ blockquote {
     background: #161b22;
     padding: 15px;
     border-radius: 10px;
-    border-left: 4px solid #da3633; /* красная полоса слева */
+    border-left: 4px solid #da3633; 
     text-align: center;
 }
 
-/* ====== 5. ФОТОАРХИВ ====== */
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -137,19 +132,18 @@ blockquote {
 .gallery-card {
     background: #161b22;
     border-radius: 10px;
-    overflow: hidden; /* чтобы картинка не вылезала за скругление */
+    overflow: hidden; 
     border: 1px solid #30363d;
     transition: transform 0.2s;
 }
 
 .gallery-card:hover {
-    transform: scale(1.03); /* лёгкое увеличение при наведении */
-}
+    transform: scale(1.03); 
 
 .gallery-card img {
     width: 100%;
     height: 200px;
-    object-fit: cover; /* картинка заполняет блок, сохраняя пропорции */
+    object-fit: cover; 
 }
 
 .gallery-card p {
@@ -158,7 +152,7 @@ blockquote {
     font-size: 14px;
 }
 
-/* ====== 6. ВИКТОРИНА ====== */
+
 input[type="text"] {
     padding: 12px 20px;
     font-size: 16px;
@@ -172,7 +166,7 @@ input[type="text"] {
 }
 
 button {
-    background: #238636; /* зелёный */
+    background: #238636; 
     color: white;
     border: none;
     padding: 10px 25px;
@@ -184,8 +178,6 @@ button {
 }
 
 button:hover { background: #2ea043; }
-
-/* Кнопки ответов */
 .answer-btn {
     display: block;
     width: 100%;
@@ -199,7 +191,7 @@ button:hover { background: #2ea043; }
     background: #30363d;
 }
 
-/* ====== 7. КЛИКЕР ====== */
+
 .pie-button {
     font-size: 100px;
     background: none;
@@ -211,10 +203,9 @@ button:hover { background: #2ea043; }
 }
 
 .pie-button:active {
-    transform: scale(0.9); /* уменьшается при клике */
+    transform: scale(0.9); 
 }
 
-/* ====== 8. ТАБЛИЦЫ ЛИДЕРОВ ====== */
 .leaderboard {
     background: #161b22;
     border-radius: 10px;
@@ -239,12 +230,24 @@ button:hover { background: #2ea043; }
     border-bottom: 1px dotted #21262d;
 }
 
-/* ====== 9. ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ ====== */
+
 .hidden {
-    display: none !important; /* полностью скрывает элемент */
+    display: none !important; 
 }
 
 .error {
     color: #da3633;
     font-size: 14px;
+}
+.coin-counter {
+    background: #f0c040;
+    color: #000;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    margin-left: auto; 
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
