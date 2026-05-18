@@ -266,3 +266,45 @@ setTimeout(() => {
     loadClickerLeaderboard();
 }, 1000);   
 
+
+
+
+
+
+
+const USER_STORAGE_KEY = 'artem_korovin_user_id';
+const COINS_STORAGE_KEY = 'artem_korovin_coins';
+function getUserId() {
+    let userId = localStorage.getItem(USER_STORAGE_KEY);
+    if (!userId) {
+        userId = 'user_' + Math.random().toString(36).substring(2, 10);
+        localStorage.setItem(USER_STORAGE_KEY, userId);
+    }
+    return userId;
+}
+function getCoins() {
+    return parseInt(localStorage.getItem(COINS_STORAGE_KEY) || '0');
+}
+function setCoins(amount) {
+    localStorage.setItem(COINS_STORAGE_KEY, amount.toString());
+}
+function addCoins(amount) {
+    const current = getCoins();
+    const newAmount = current + amount;
+    setCoins(newAmount);
+    updateCoinDisplay();
+    return newAmount;
+}
+function spendCoins(amount) {
+    const current = getCoins();
+    if (current < amount) return false; // Не хватает!
+    setCoins(current - amount);
+    updateCoinDisplay();
+    return true;
+}
+function updateCoinDisplay() {
+    const coinDisplays = document.querySelectorAll('.coin-display');
+    coinDisplays.forEach(el => {
+        el.textContent = getCoins();
+    });
+}
