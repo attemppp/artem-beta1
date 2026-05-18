@@ -251,3 +251,7 @@ button:hover { background: #2ea043; }
     align-items: center;
     gap: 5px;
 }
+    @keyframes floatUp {
+    0% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-60px); }
+}
