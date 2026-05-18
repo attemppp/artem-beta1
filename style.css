@@ -255,3 +255,67 @@ button:hover { background: #2ea043; }
     0% { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(-60px); }
 }
+    .clicker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.artem-clicker {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #da3633;
+    transition: transform 0.1s;
+    user-select: none; /* Запрещает выделение текста при клике */
+    -webkit-tap-highlight-color: transparent; /* Убирает синий ореол на телефонах */
+}
+
+.artem-clicker:active {
+    transform: scale(0.9);
+}
+
+.artem-face {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none; /* Чтобы клик шёл на родителя, а не на картинку */
+}
+
+.click-zone {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+
+.click-hint {
+    color: #8b949e;
+    font-size: 14px;
+    margin-top: 10px;
+    animation: pulse 2s infinite;
+}
+
+/* Анимация дрожания при клике */
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+.shake {
+    animation: shake 0.3s ease;
+}
+
+/* Анимация "попадания" — красная вспышка */
+@keyframes hitFlash {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+    100% { box-shadow: 0 0 0 30px rgba(255, 0, 0, 0); }
+}
+
+.hit {
+    animation: hitFlash 0.5s ease;
+}
