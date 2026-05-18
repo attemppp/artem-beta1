@@ -264,13 +264,7 @@ function loadClickerLeaderboard() {
 setTimeout(() => {
     loadQuizLeaderboard();
     loadClickerLeaderboard();
-}, 1000);   
-
-
-
-
-
-
+}, 1000);
 
 const USER_STORAGE_KEY = 'artem_korovin_user_id';
 const COINS_STORAGE_KEY = 'artem_korovin_coins';
@@ -297,7 +291,7 @@ function addCoins(amount) {
 }
 function spendCoins(amount) {
     const current = getCoins();
-    if (current < amount) return false; // Не хватает!
+    if (current < amount) return false; 
     setCoins(current - amount);
     updateCoinDisplay();
     return true;
@@ -307,4 +301,42 @@ function updateCoinDisplay() {
     coinDisplays.forEach(el => {
         el.textContent = getCoins();
     });
+pieBtn.addEventListener('click', () => {
+    pieCount++;
+    pieCountSpan.textContent = pieCount;
+    
+    
+    if (pieCount % 10 === 0) {
+        addCoins(1);
+
+        showFloatingCoin(event);
+    }
+
+    pieBtn.classList.add('shake');
+    setTimeout(() => { pieBtn.classList.remove('shake'); }, 300);
+
+    // Смешные фразы и пасхалки
+    // ... (будет дальше)
+    
+    if (pieCount >= 20) {
+        pieSaveBtn.classList.remove('hidden');
+        pieNicknameInput.classList.remove('hidden');
+    }
+});
+function showFloatingCoin(event) {
+    const coin = document.createElement('div');
+    coin.textContent = '+1 🪙';
+    coin.style.cssText = `
+        position: fixed;
+        left: ${event.clientX}px;
+        top: ${event.clientY}px;
+        color: #f0c040;
+        font-weight: bold;
+        font-size: 20px;
+        pointer-events: none;
+        animation: floatUp 1s ease forwards;
+        z-index: 9999;
+    `;
+    document.body.appendChild(coin);
+    setTimeout(() => coin.remove(), 1000);
 }
